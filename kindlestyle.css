@@ -1,0 +1,45 @@
+/* your highlights */
+img.quote.removableQuote {
+}
+
+div.highlightRow.personalHighlight {
+}
+
+div.highlightRow.personalHighlight span.highlight {
+}
+
+div.highlightRow.personalHighlight span.yourNote {
+    color: #BBBBBB;
+}
+
+/* your highlights page */
+div.highlightRow.yourHighlight {
+}
+
+div.highlightRow.yourHighlight span.highlight {
+}
+
+div.highlightRow.yourHighlight span.yourNote {
+    color: #BBBBBB;
+}
+
+span.noteContent {
+    color: #AA0000;
+}
+
+/* other people's highlights */
+img.quote {
+}
+
+div.highlightRow.popularHighlight {
+}
+
+div.highlightRow.popularHighlight span.context {
+    color: #999999;
+}
+
+div.highlightRow.popularHighlight span.highlight {
+    color: #666666;
+}
+
+

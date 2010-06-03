@@ -1,0 +1,17 @@
+{
+    "name": "Marginalia",
+    "version": "0.1",
+    "description": "Improve the formatting of the Kindle online highlighting pages.",
+    "permissions": [
+        "tabs", "http://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://kindle.amazon.com/your_highlights",
+                "http://kindle.amazon.com/work/*"
+            ],
+            "css": ["kindlestyle.css"]
+        }
+    ]
+}

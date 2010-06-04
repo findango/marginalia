@@ -1,0 +1,201 @@
+<html>
+<head>
+        <title>mytitle</title>
+
+<script type="text/javascript">
+
+defaultImage = "http://t3.gstatic.com/images?q=tbn:8naXDQOs4h6FyM:http://www.kshousingcorp.org:8081/images/Star%2520Pictures/large_gold_star.png"
+exclamation = "http://t0.gstatic.com/images?q=tbn:FRf08rT-Dl5aRM:http://www.camsoft.co.kr/CrystalMaker/shared_resources/exclamation_icon.jpg"
+question = "http://t0.gstatic.com/images?q=tbn:-4NE6tle87-UiM:http://upload.wikimedia.org/wikipedia/commons/3/33/White_square_with_question_mark.png"
+star = "http://t3.gstatic.com/images?q=tbn:8naXDQOs4h6FyM:http://www.kshousingcorp.org:8081/images/Star%2520Pictures/large_gold_star.png"
+
+tags = {
+	'q'  : question,
+	'qq' : question,
+	'b'  : exclamation,
+	'bb' : star,
+	'qb' : question,
+	'bq' : exclamation,
+	's'  : star
+}
+
+window.onload = function runme() {
+	addGlobalStyle('span.noteContent { color: red ! important; }')
+	handleNotes()
+}
+
+function addGlobalStyle(css) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+}
+
+function handleNotes() {
+	var allDivs = xpath("//div[@class='highlightRow personalHighlight']", document)
+	for (var i = 0; i < allDivs.snapshotLength; i++) {
+		var thisDiv = allDivs.snapshotItem(i)
+		var span = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
+		var note = span.innerHTML
+		console.log('Found note: ' + note)
+		//thisDiv.childElements[0].src = exclam 
+		var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
+		var tag = parseAnnotation(note)
+		if (tag) { 
+			img.width = 22
+			img.height = 18 
+			img.src = tag 
+		}
+	}
+}
+
+function parseAnnotation(note) {
+	var result = note.match(/^\.(\w+)(\s+|$)/)
+	if (result) {
+		if (tags[result[1]]) {
+			console.log("Matched tag! " + result)
+			return tags[result[1]]
+		} else {
+			console.log('Unknown tag: ' + result[1]) 
+		}
+	}
+}
+
+function xpath(path, context) {
+	if (context == null) { context = document }
+	return document.evaluate(path, context, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+}
+</script>
+
+</head>
+
+<body>
+
+<h2 id="myheader">header</h2>
+
+<div class="highlightRow personalHighlight">
+
+     <img alt="&ldquo;" class="quote removableQuote" src="http://g-ecx.images-amazon.com/images/G/01/reading/images/perOpenQuoteSm._V216850697_.png" title="Personal Highlight" />
+
+        <div class="text">
+                <span class="highlight">Giuliano della Rovere, His Holiness Pope Julius IIâ€”il pontefice terribile.</span><a href="kindle://book?action=open&asin=B000OZ0NNA&location=161" class="k4pcReadMore readMore">Read&nbsp;more&nbsp;at&nbsp;location&nbsp;161</a><form action="/user_annotation_relation/delete_highlight" class="deleteHighlightForm" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="8b4ec68b583c80f534d2719b9533f6294a869d23" /></div><input id="asin" name="asin" type="hidden" value="B000OZ0NNA" /><input id="annotation_id" name="annotation_id" type="hidden" value="a1M80MSCOJGM0B" /><span class="deleteHighlight"><button class="textSubmit" name="delete" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Delete&nbsp;this&nbsp;highlight</span></button></span><span class="deleteHighlightUndo hidden"><button class="textSubmit" name="undo" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Undo&nbsp;deletion</span></button></span></form>
+
+                <p class="editNote " id="editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP">
+                        <span class="hidden asin">B000OZ0NNA</span>
+                        <span class="hidden annotation_id">a1CRH3E2HA6TAP</span>
+                        <span class="hidden end_location">24202</span>
+                        <span class="yourNote ">
+                                Note:
+                        </span>
+
+                    <span class="noteContent">Note without any special syntax, hence no icon change. Has some escaped chars in it though &quot;in quotes&quot;</span>
+                        <a href="/user_annotation_relation/edit_note_popup?annotation_id=a1CRH3E2HA6TAP&amp;asin=B000OZ0NNA&amp;attached=a1M80MSCOJGM0B&amp;end_location=24202&amp;note_area_id=editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP&amp;note_text=Also+referenced+in+%26quot%3BThe+Agony+and+The+Ecstasy%26quot%3B&amp;return_to=%2Fwork%2Fbasilica-splendor-scandal-building-ebook%2FB000EOHMSA%2FB000OZ0NNA" class="addEditNote">Edit this note</a>
+                </p>
+
+        </div>
+</div>
+
+
+
+<div class="highlightRow personalHighlight">
+
+     <img alt="&ldquo;" class="quote removableQuote" src="http://g-ecx.images-amazon.com/images/G/01/reading/images/perOpenQuoteSm._V216850697_.png" title="Personal Highlight" />
+
+        <div class="text">
+                <span class="highlight">Giuliano della Rovere, His Holiness Pope Julius IIâ€”il pontefice terribile.</span><a href="kindle://book?action=open&asin=B000OZ0NNA&location=161" class="k4pcReadMore readMore">Read&nbsp;more&nbsp;at&nbsp;location&nbsp;161</a><form action="/user_annotation_relation/delete_highlight" class="deleteHighlightForm" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="8b4ec68b583c80f534d2719b9533f6294a869d23" /></div><input id="asin" name="asin" type="hidden" value="B000OZ0NNA" /><input id="annotation_id" name="annotation_id" type="hidden" value="a1M80MSCOJGM0B" /><span class="deleteHighlight"><button class="textSubmit" name="delete" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Delete&nbsp;this&nbsp;highlight</span></button></span><span class="deleteHighlightUndo hidden"><button class="textSubmit" name="undo" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Undo&nbsp;deletion</span></button></span></form>
+
+                <p class="editNote " id="editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP">
+                        <span class="hidden asin">B000OZ0NNA</span>
+                        <span class="hidden annotation_id">a1CRH3E2HA6TAP</span>
+                        <span class="hidden end_location">24202</span>
+                        <span class="yourNote ">
+                                Note:
+                        </span>
+
+                    <span class="noteContent">.b This one shoud have a bang</span>
+                        <a href="/user_annotation_relation/edit_note_popup?annotation_id=a1CRH3E2HA6TAP&amp;asin=B000OZ0NNA&amp;attached=a1M80MSCOJGM0B&amp;end_location=24202&amp;note_area_id=editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP&amp;note_text=Also+referenced+in+%26quot%3BThe+Agony+and+The+Ecstasy%26quot%3B&amp;return_to=%2Fwork%2Fbasilica-splendor-scandal-building-ebook%2FB000EOHMSA%2FB000OZ0NNA" class="addEditNote">Edit this note</a>
+                </p>
+
+        </div>
+</div>
+
+
+<div class="highlightRow personalHighlight">
+
+     <img alt="&ldquo;" class="quote removableQuote" src="http://g-ecx.images-amazon.com/images/G/01/reading/images/perOpenQuoteSm._V216850697_.png" title="Personal Highlight" />
+
+        <div class="text">
+                <span class="highlight">Giuliano della Rovere, His Holiness Pope Julius IIâ€”il pontefice terribile.</span><a href="kindle://book?action=open&asin=B000OZ0NNA&location=161" class="k4pcReadMore readMore">Read&nbsp;more&nbsp;at&nbsp;location&nbsp;161</a><form action="/user_annotation_relation/delete_highlight" class="deleteHighlightForm" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="8b4ec68b583c80f534d2719b9533f6294a869d23" /></div><input id="asin" name="asin" type="hidden" value="B000OZ0NNA" /><input id="annotation_id" name="annotation_id" type="hidden" value="a1M80MSCOJGM0B" /><span class="deleteHighlight"><button class="textSubmit" name="delete" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Delete&nbsp;this&nbsp;highlight</span></button></span><span class="deleteHighlightUndo hidden"><button class="textSubmit" name="undo" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Undo&nbsp;deletion</span></button></span></form>
+
+                <p class="editNote " id="editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP">
+                        <span class="hidden asin">B000OZ0NNA</span>
+                        <span class="hidden annotation_id">a1CRH3E2HA6TAP</span>
+                        <span class="hidden end_location">24202</span>
+                        <span class="yourNote ">
+                                Note:
+                        </span>
+
+                    <span class="noteContent"></span>
+                        <a href="/user_annotation_relation/edit_note_popup?annotation_id=a1CRH3E2HA6TAP&amp;asin=B000OZ0NNA&amp;attached=a1M80MSCOJGM0B&amp;end_location=24202&amp;note_area_id=editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP&amp;note_text=Also+referenced+in+%26quot%3BThe+Agony+and+The+Ecstasy%26quot%3B&amp;return_to=%2Fwork%2Fbasilica-splendor-scandal-building-ebook%2FB000EOHMSA%2FB000OZ0NNA" class="addEditNote">Edit this note</a>
+                </p>
+
+        </div>
+</div>
+
+
+
+<div class="highlightRow personalHighlight">
+
+     <img alt="&ldquo;" class="quote removableQuote" src="http://g-ecx.images-amazon.com/images/G/01/reading/images/perOpenQuoteSm._V216850697_.png" title="Personal Highlight" />
+
+        <div class="text">
+                <span class="highlight">Giuliano della Rovere, His Holiness Pope Julius IIâ€”il pontefice terribile.</span><a href="kindle://book?action=open&asin=B000OZ0NNA&location=161" class="k4pcReadMore readMore">Read&nbsp;more&nbsp;at&nbsp;location&nbsp;161</a><form action="/user_annotation_relation/delete_highlight" class="deleteHighlightForm" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="8b4ec68b583c80f534d2719b9533f6294a869d23" /></div><input id="asin" name="asin" type="hidden" value="B000OZ0NNA" /><input id="annotation_id" name="annotation_id" type="hidden" value="a1M80MSCOJGM0B" /><span class="deleteHighlight"><button class="textSubmit" name="delete" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Delete&nbsp;this&nbsp;highlight</span></button></span><span class="deleteHighlightUndo hidden"><button class="textSubmit" name="undo" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Undo&nbsp;deletion</span></button></span></form>
+
+                <p class="editNote " id="editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP">
+                        <span class="hidden asin">B000OZ0NNA</span>
+                        <span class="hidden annotation_id">a1CRH3E2HA6TAP</span>
+                        <span class="hidden end_location">24202</span>
+                        <span class="yourNote ">
+                                Note:
+                        </span>
+
+                    <span class="noteContent">.bb Should have a star.
+This annotation has a newline in it too.</span>
+                        <a href="/user_annotation_relation/edit_note_popup?annotation_id=a1CRH3E2HA6TAP&amp;asin=B000OZ0NNA&amp;attached=a1M80MSCOJGM0B&amp;end_location=24202&amp;note_area_id=editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP&amp;note_text=Also+referenced+in+%26quot%3BThe+Agony+and+The+Ecstasy%26quot%3B&amp;return_to=%2Fwork%2Fbasilica-splendor-scandal-building-ebook%2FB000EOHMSA%2FB000OZ0NNA" class="addEditNote">Edit this note</a>
+                </p>
+
+        </div>
+</div>
+
+<div class="highlightRow personalHighlight">
+
+     <img alt="&ldquo;" class="quote removableQuote" src="http://g-ecx.images-amazon.com/images/G/01/reading/images/perOpenQuoteSm._V216850697_.png" title="Personal Highlight" />
+
+        <div class="text">
+                <span class="highlight">Giuliano della Rovere, His Holiness Pope Julius IIâ€”il pontefice terribile.</span><a href="kindle://book?action=open&asin=B000OZ0NNA&location=161" class="k4pcReadMore readMore">Read&nbsp;more&nbsp;at&nbsp;location&nbsp;161</a><form action="/user_annotation_relation/delete_highlight" class="deleteHighlightForm" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="8b4ec68b583c80f534d2719b9533f6294a869d23" /></div><input id="asin" name="asin" type="hidden" value="B000OZ0NNA" /><input id="annotation_id" name="annotation_id" type="hidden" value="a1M80MSCOJGM0B" /><span class="deleteHighlight"><button class="textSubmit" name="delete" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Delete&nbsp;this&nbsp;highlight</span></button></span><span class="deleteHighlightUndo hidden"><button class="textSubmit" name="undo" type="submit"><span class="bullet">&nbsp;&nbsp;&nbsp;&#8226;&nbsp;</span><span class="underline">Undo&nbsp;deletion</span></button></span></form>
+
+                <p class="editNote " id="editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP">
+                        <span class="hidden asin">B000OZ0NNA</span>
+                        <span class="hidden annotation_id">a1CRH3E2HA6TAP</span>
+                        <span class="hidden end_location">24202</span>
+                        <span class="yourNote ">
+                                Note:
+                        </span>
+
+                    <span class="noteContent">.q</span>
+                        <a href="/user_annotation_relation/edit_note_popup?annotation_id=a1CRH3E2HA6TAP&amp;asin=B000OZ0NNA&amp;attached=a1M80MSCOJGM0B&amp;end_location=24202&amp;note_area_id=editNotea1M80MSCOJGM0B_a1CRH3E2HA6TAP&amp;note_text=Also+referenced+in+%26quot%3BThe+Agony+and+The+Ecstasy%26quot%3B&amp;return_to=%2Fwork%2Fbasilica-splendor-scandal-building-ebook%2FB000EOHMSA%2FB000OZ0NNA" class="addEditNote">Edit this note</a>
+                </p>
+
+        </div>
+</div>
+
+<div>
+	<span><h2>some other markup</h2></span>
+</div>
+
+</body>
+</html>
+

@@ -24,7 +24,7 @@ tags = {
 //--------- do not edit below unless you know what you're doing ------
 
 addGlobalStyle('span.noteContent { color: red ! important; }')
-handleNotes()
+handleNotesAndHighlights() 
 
 function addGlobalStyle(css) {
     var head, style;
@@ -36,37 +36,39 @@ function addGlobalStyle(css) {
     head.appendChild(style);
 }
 
-function handleNotes() {
-	var allDivs = xpath("//div[@class='highlightRow personalHighlight']", document)
-	for (var i = 0; i < allDivs.snapshotLength; i++) {
-		var thisDiv = allDivs.snapshotItem(i)
-		var span = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
-		var note = span.innerHTML
-		console.log('Found note: ' + note)
-		//thisDiv.childElements[0].src = exclam 
-		var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
-		var tag = parseAnnotation(note)
-		if (tag) { 
-			img.width = 22
-			img.height = 18 
-			img.src = tag 
-		}
-	}
+function handleNotesAndHighlights() {
+        var allDivs = xpath("//div[@class='highlightRow personalHighlight']", document)
+        for (var i = 0; i < allDivs.snapshotLength; i++) {
+                var thisDiv = allDivs.snapshotItem(i)
+                var noteSpan = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
+                var noteText = noteSpan.innerHTML
+               console.log('Found note: ' + noteText)
+                var annotation = parseAnnotation(noteText)
+                if (annotation) {
+                        var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
+                        img.width = 22
+                        img.height = 18
+                        img.src = annotation['tag']
+                        noteSpan.innerHTML = annotation['note']
+                }
+        }
 }
 
-function parseAnnotation(note) {
-	var result = note.match(/^\.(\w+)(\s+|$)/)
-	if (result) {
-		if (tags[result[1]]) {
-			console.log("Matched tag! " + result)
-			return tags[result[1]]
-		} else {
-			console.log('Unknown tag: ' + result[1]) 
-		}
-	}
+function parseAnnotation(noteText) {
+        var result = noteText.match(/^\.(\w+)(\s+|$)/)
+        if (result) {
+                if (tags[result[1]]) {
+                        console.log('Matched tag! ' + result)
+
+                        return { 'tag' : tags[result[1]], 'note' : result[2] }
+                } else {
+                        console.log('Unknown tag: ' + result[1])
+                }
+        }
 }
 
 function xpath(path, context) {
 	if (context == null) { context = document }
 	return document.evaluate(path, context, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 }
+

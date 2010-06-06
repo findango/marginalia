@@ -9,7 +9,7 @@ div.highlightRow.personalHighlight span.highlight {
 }
 
 div.highlightRow.personalHighlight span.yourNote {
-    color: #BBBBBB;
+    display: none;
 }
 
 /* your highlights page */
@@ -39,7 +39,6 @@ div.highlightRow.popularHighlight span.context {
 }
 
 div.highlightRow.popularHighlight span.highlight {
-    color: #666666;
 }
 
 

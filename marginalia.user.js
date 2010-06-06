@@ -12,6 +12,9 @@ exclamation = "http://t0.gstatic.com/images?q=tbn:FRf08rT-Dl5aRM:http://www.cams
 question = "http://t0.gstatic.com/images?q=tbn:-4NE6tle87-UiM:http://upload.wikimedia.org/wikipedia/commons/3/33/White_square_with_question_mark.png"
 star = "http://t3.gstatic.com/images?q=tbn:8naXDQOs4h6FyM:http://www.kshousingcorp.org:8081/images/Star%2520Pictures/large_gold_star.png"
 
+hideDefaultIcons = true // hide the default quote icon for entries you haven't annotated
+spacerImage = "http://www.longtrek.com/images/annotations/spacer.jpg"
+
 tags = {
 	'q'  : question,
 	'qq' : question,
@@ -45,14 +48,18 @@ function handleNotesAndHighlights() {
 		var noteText = noteSpan.innerHTML
 		console.log('Found note: ' + noteText)
 		var annotation = parseAnnotation(noteText)
+		var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
 		if (annotation) {
-			var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
-			if(img) {
-				img.width = 22
-				img.height = 18
-				img.src = annotation['tag']
-			}
 			noteSpan.innerHTML = annotation['note']
+		}
+		if(img) {
+			img.width = 22
+			img.height = 18
+			if (annotation) {
+				img.src = annotation['tag']
+			} else if (hideDefaultIcons) {
+				img.src = spacerImage
+			}
 		}
 	}
 }
@@ -64,7 +71,7 @@ function parseAnnotation(noteText) {
 			console.log('Matched tag! ' + result)
 			return { 'tag' : tags[result[1]], 'note' : result[3] }
 		} else {
-				console.log('Unknown tag: ' + result[1])
+			console.log('Unknown tag: ' + result[1])
 		}
 	}
 }

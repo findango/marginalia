@@ -9,13 +9,14 @@ window.onload = function runme() {
 }
 
 
+
 // ==UserScript==
 // @name           KindleNotes
 // @namespace      http://github.com/findango/marginalia
 // @description    Improve the kindle notes and highlights page.
 // @include        http://kindle.amazon.com/your_highlights
 // @include        http://kindle.amazon.com/work/*
-// ==/UserScript==
+// ==UserScript==
 
 
 exclamation = "http://t0.gstatic.com/images?q=tbn:FRf08rT-Dl5aRM:http://www.camsoft.co.kr/CrystalMaker/shared_resources/exclamation_icon.jpg"
@@ -33,7 +34,7 @@ tags = {
 }
 
 //--------- do not edit below unless you know what you're doing ------
-
+console.log('Parsing file')
 addGlobalStyle('span.noteContent { color: red ! important; }')
 handleNotesAndHighlights() 
 
@@ -66,12 +67,11 @@ function handleNotesAndHighlights() {
 }
 
 function parseAnnotation(noteText) {
-        var result = noteText.match(/^\.(\w+)(\s+|$)/)
+        var result = noteText.match(/^\.(\w+)(\s+|$)(.*)/)
         if (result) {
                 if (tags[result[1]]) {
                         console.log('Matched tag! ' + result)
-
-                        return { 'tag' : tags[result[1]], 'note' : result[2] }
+                        return { 'tag' : tags[result[1]], 'note' : result[3] }
                 } else {
                         console.log('Unknown tag: ' + result[1])
                 }
@@ -82,7 +82,6 @@ function xpath(path, context) {
 	if (context == null) { context = document }
 	return document.evaluate(path, context, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 }
-
 
 
 </script>

@@ -38,7 +38,7 @@ function addGlobalStyle(css) {
 }
 
 function handleNotesAndHighlights() {
-        var allDivs = xpath("//div[@class='highlightRow personalHighlight']", document)
+	var allDivs = xpath("//div[@class='highlightRow personalHighlight'] | //div[@class='highlightRow yourHighlight']", document);
         for (var i = 0; i < allDivs.snapshotLength; i++) {
                 var thisDiv = allDivs.snapshotItem(i)
                 var noteSpan = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
@@ -47,9 +47,11 @@ function handleNotesAndHighlights() {
                 var annotation = parseAnnotation(noteText)
                 if (annotation) {
                         var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
-                        img.width = 22
-                        img.height = 18
-                        img.src = annotation['tag']
+			if(img) {
+                        	img.width = 22
+                        	img.height = 18
+                        	img.src = annotation['tag']
+			}
                         noteSpan.innerHTML = annotation['note']
                 }
         }
@@ -71,4 +73,5 @@ function xpath(path, context) {
 	if (context == null) { context = document }
 	return document.evaluate(path, context, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 }
+
 

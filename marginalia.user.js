@@ -55,12 +55,11 @@ function handleNotesAndHighlights() {
 }
 
 function parseAnnotation(noteText) {
-        var result = noteText.match(/^\.(\w+)(\s+|$)/)
+        var result = noteText.match(/^\.(\w+)(\s+|$)(.*)/)
         if (result) {
                 if (tags[result[1]]) {
                         console.log('Matched tag! ' + result)
-
-                        return { 'tag' : tags[result[1]], 'note' : result[2] }
+                        return { 'tag' : tags[result[1]], 'note' : result[3] }
                 } else {
                         console.log('Unknown tag: ' + result[1])
                 }

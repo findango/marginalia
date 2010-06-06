@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name           KindleNotes
-// @namespace      http://github.com/findango/marginalia
+// @name		   KindleNotes
+// @namespace	   http://github.com/findango/marginalia
 // @description    Improve the kindle notes and highlights page.
-// @include        http://kindle.amazon.com/your_highlights
-// @include        http://kindle.amazon.com/work/*
-// @resource       kindlestyle http://github.com/findango/marginalia/raw/master/kindlestyle.css
+// @include		   http://kindle.amazon.com/your_highlights
+// @include		   http://kindle.amazon.com/work/*
+// @resource	   kindlestyle http://github.com/findango/marginalia/raw/master/kindlestyle.css
 // ==/UserScript==
 
 
@@ -28,45 +28,45 @@ addGlobalStyle(GM_getResourceText("kindlestyle"))
 handleNotesAndHighlights() 
 
 function addGlobalStyle(css) {
-    var head, style;
-    head = document.getElementsByTagName('head')[0];
-    if (!head) { return; }
-    style = document.createElement('style');
-    style.type = 'text/css';
-    style.innerHTML = css;
-    head.appendChild(style);
+	var head, style;
+	head = document.getElementsByTagName('head')[0];
+	if (!head) { return; }
+	style = document.createElement('style');
+	style.type = 'text/css';
+	style.innerHTML = css;
+	head.appendChild(style);
 }
 
 function handleNotesAndHighlights() {
 	var allDivs = xpath("//div[@class='highlightRow personalHighlight'] | //div[@class='highlightRow yourHighlight']", document);
-        for (var i = 0; i < allDivs.snapshotLength; i++) {
-                var thisDiv = allDivs.snapshotItem(i)
-                var noteSpan = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
-                var noteText = noteSpan.innerHTML
-               console.log('Found note: ' + noteText)
-                var annotation = parseAnnotation(noteText)
-                if (annotation) {
-                        var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
+	for (var i = 0; i < allDivs.snapshotLength; i++) {
+		var thisDiv = allDivs.snapshotItem(i)
+		var noteSpan = xpath( ".//span[@class='noteContent']", thisDiv).snapshotItem(0)
+		var noteText = noteSpan.innerHTML
+		console.log('Found note: ' + noteText)
+		var annotation = parseAnnotation(noteText)
+		if (annotation) {
+			var img = xpath( ".//img[@class='quote removableQuote']", thisDiv).snapshotItem(0)
 			if(img) {
-                        	img.width = 22
-                        	img.height = 18
-                        	img.src = annotation['tag']
+				img.width = 22
+				img.height = 18
+				img.src = annotation['tag']
 			}
-                        noteSpan.innerHTML = annotation['note']
-                }
-        }
+			noteSpan.innerHTML = annotation['note']
+		}
+	}
 }
 
 function parseAnnotation(noteText) {
-        var result = noteText.match(/^\.(\w+)(\s+|$)(.*)/)
-        if (result) {
-                if (tags[result[1]]) {
-                        console.log('Matched tag! ' + result)
-                        return { 'tag' : tags[result[1]], 'note' : result[3] }
-                } else {
-                        console.log('Unknown tag: ' + result[1])
-                }
-        }
+	var result = noteText.match(/^\.(\w+)(\s+|$)(.*)/)
+	if (result) {
+		if (tags[result[1]]) {
+			console.log('Matched tag! ' + result)
+			return { 'tag' : tags[result[1]], 'note' : result[3] }
+		} else {
+				console.log('Unknown tag: ' + result[1])
+		}
+	}
 }
 
 function xpath(path, context) {

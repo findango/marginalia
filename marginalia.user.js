@@ -8,21 +8,20 @@
 // ==/UserScript==
 
 
-exclamation = "http://t0.gstatic.com/images?q=tbn:FRf08rT-Dl5aRM:http://www.camsoft.co.kr/CrystalMaker/shared_resources/exclamation_icon.jpg"
-question = "http://t0.gstatic.com/images?q=tbn:-4NE6tle87-UiM:http://upload.wikimedia.org/wikipedia/commons/3/33/White_square_with_question_mark.png"
-star = "http://t3.gstatic.com/images?q=tbn:8naXDQOs4h6FyM:http://www.kshousingcorp.org:8081/images/Star%2520Pictures/large_gold_star.png"
-
 hideDefaultIcons = true // hide the default quote icon for entries you haven't annotated
-spacerImage = "http://www.longtrek.com/images/annotations/spacer.jpg"
+spacerImage = "http://github.com/spetschu/marginalia/raw/master/images/spacer.jpg"
 
+// Ideally, images should be 22x18 pixels although larger ones will be squashed down to that size.
 tags = {
-	'q'  : question,
-	'qq' : question,
-	'b'  : exclamation,
-	'bb' : exclamation,
-	'qb' : question,
-	'bq' : exclamation,
-	's'  : star
+	'q'  : "http://github.com/spetschu/marginalia/raw/master/images/q.png",
+	'qq' : "http://github.com/spetschu/marginalia/raw/master/images/qq.png",
+	'b'  : "http://github.com/spetschu/marginalia/raw/master/images/b.png",
+	'bb' : "http://github.com/spetschu/marginalia/raw/master/images/bb.png",
+	'qb' : "http://github.com/spetschu/marginalia/raw/master/images/qb.png",
+	'bq' : "http://github.com/spetschu/marginalia/raw/master/images/bq.png",
+	'd'  : "http://github.com/spetschu/marginalia/raw/master/images/d.png",
+	'ch' : "http://github.com/spetschu/marginalia/raw/master/images/ch.png",
+	's'  : "http://github.com/spetschu/marginalia/raw/master/images/ch.png"
 }
 
 //--------- do not edit below unless you know what you're doing ------

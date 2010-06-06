@@ -4,6 +4,7 @@
 // @description    Improve the kindle notes and highlights page.
 // @include        http://kindle.amazon.com/your_highlights
 // @include        http://kindle.amazon.com/work/*
+// @resource       kindlestyle http://github.com/findango/marginalia/raw/master/kindlestyle.css
 // ==/UserScript==
 
 
@@ -23,7 +24,7 @@ tags = {
 
 //--------- do not edit below unless you know what you're doing ------
 
-addGlobalStyle('span.noteContent { color: red ! important; }')
+addGlobalStyle(GM_getResourceText("kindlestyle"))
 handleNotesAndHighlights() 
 
 function addGlobalStyle(css) {
